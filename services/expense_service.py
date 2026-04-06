@@ -43,3 +43,38 @@ def view_expenses():
             f"{exp['category']} | "
             f"{exp['date']}"
         )
+        
+def delete_expense():
+    expenses = load_expenses()
+    
+    if not expenses:
+        print("No expenses to delete.")
+        return
+    
+    print("\nExpenses List:")
+    
+    for i, exp in enumerate(expenses,start=1):
+        print(
+            f"{i}. "
+            f"{exp['name']} | "
+            f"${exp['amount']} | "
+            f"{exp['category']} | "
+            f"{exp['date']}"
+        )
+        
+    try:
+        index = int(input("Enter the number of the expense to delete: ")) - 1
+        
+        if 0 <= index < len(expenses):
+            deleted = expenses.pop(index)
+            save_expenses(expenses)
+            
+            print(
+                f"✅ Deleted: {deleted['name']}"
+            )
+        
+        else:
+            print("Invalid number. No expense deleted.")
+            
+    except ValueError:
+        print("Invalid input. Please enter a number.")
