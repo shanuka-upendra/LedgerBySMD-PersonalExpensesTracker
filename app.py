@@ -1,6 +1,7 @@
 from services.expense_service import (
     add_expense,
-    view_expenses
+    view_expenses,
+    delete_expense
 )
 
 def main():
@@ -8,7 +9,8 @@ def main():
         print("\nExpense Tracker")
         print("1. Add Expense")
         print("2. View Expenses")
-        print("3. Exit")
+        print("3. Delete Expense")
+        print("4. Exit")
 
         choice = input("Enter your choice: ")
 
@@ -17,8 +19,11 @@ def main():
 
         elif choice == "2":
             view_expenses()
-
+            
         elif choice == "3":
+            delete_expense()
+            
+        elif choice == "4":
             print("Exiting the program. Goodbye!")
             break
 
