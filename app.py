@@ -1,6 +1,7 @@
 from services.expense_service import (
     add_expense,
     edit_expense,
+    filter_by_category,
     show_total,
     view_expenses,
     delete_expense,
@@ -15,7 +16,8 @@ def main():
         print("3. Delete Expense")
         print("4. Edit Expense")
         print("5. Show Total Expenses")
-        print("6. Exit")
+        print("6. Filter by Category")
+        print("7. Exit")
 
         choice = input("Enter your choice: ")
 
@@ -35,6 +37,9 @@ def main():
             show_total()
 
         elif choice == "6":
+            filter_by_category()
+
+        elif choice == "7":
             print("Exiting the program. Goodbye!")
             break
 

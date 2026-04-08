@@ -74,15 +74,16 @@ def delete_expense():
     except ValueError:
         print("Invalid input. Please enter a number.")
 
+
 def edit_expense():
     expenses = load_expenses()
-    
+
     if not expenses:
         print("No expenses to edit.")
         return
-    
+
     print("\nExpenses List:")
-    
+
     for i, exp in enumerate(expenses, start=1):
         print(
             f"{i}. "
@@ -91,38 +92,55 @@ def edit_expense():
             f"{exp['category']} | "
             f"{exp['date']}"
         )
-        
+
     try:
         index = int(input("Enter the number of the expense to edit: ")) - 1
-        
+
         if 0 <= index < len(expenses):
             name = input("Enter new expense name: ")
             amount = float(input("Enter new expense amount: "))
             category = input("Enter new expense category: ")
-            
+
             expenses[index]["name"] = name
             expenses[index]["amount"] = amount
             expenses[index]["category"] = category
-            
+
             save_expenses(expenses)
-            
+
             print(f"✅ Edited: {name}")
-            
+
         else:
             print("Invalid number. No expense edited.")
-            
+
     except ValueError:
         print("Invalid input. Please enter a number.")
-        
-        
+
+
 def show_total():
     expenses = load_expenses()
-        
-    total = sum(
-        exp["amount"]
-        for exp in expenses
-    )
-    
-    print(
-        f"\n💰 Total Expenses: ${total:.2f}:"
-    )
+
+    total = sum(exp["amount"] for exp in expenses)
+
+    print(f"\n💰 Total Expenses: ${total:.2f}:")
+
+
+def filter_by_category():
+    expenses = load_expenses()
+
+    category = input("Enter category to filter:  ")
+
+    filtered = [exp for exp in expenses if exp["category"].lower() == category.lower()]
+
+    if not filtered:
+        print("No expenses found for this category.")
+        return
+
+    print("\nFiltered Expenses:")
+
+    for exp in filtered:
+        print(
+            f"{exp['name']} | "
+            f"${exp['amount']} | "
+            f"{exp['category']} | "
+            f"{exp['date']}"
+        )
