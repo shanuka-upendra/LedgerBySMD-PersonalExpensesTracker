@@ -145,19 +145,20 @@ def filter_by_category():
             f"{exp['date']}"
         )
 
+
 def filter_by_date():
     expenses = load_expenses()
-    
+
     date = input("Enter date (YYYY-MM-DD): ")
-    
+
     filtered = [exp for exp in expenses if exp["date"] == date]
-    
+
     if not filtered:
         print("No expenses found for this date.")
         return
-    
+
     print("\nExpenses on this date: ")
-    
+
     for exp in filtered:
         print(
             f"{exp['name']} | "
@@ -165,3 +166,23 @@ def filter_by_date():
             f"{exp['category']} | "
             f"{exp['date']}"
         )
+
+
+def monthly_summary():
+    expenses = load_expenses()
+
+    summary = {}
+
+    for exp in expenses:
+
+        month = exp["date"][:7]
+
+        if month not in summary:
+            summary[month] = 0
+
+        summary[month] += exp["amount"]
+
+    print("\nMonthly Summary:")
+
+    for month, total in summary.items():
+        print(f"{month} : ${total:.2f}")
