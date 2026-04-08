@@ -2,6 +2,7 @@ from services.expense_service import (
     add_expense,
     edit_expense,
     filter_by_category,
+    filter_by_date,
     show_total,
     view_expenses,
     delete_expense,
@@ -17,7 +18,8 @@ def main():
         print("4. Edit Expense")
         print("5. Show Total Expenses")
         print("6. Filter by Category")
-        print("7. Exit")
+        print("7. Filter by Date")
+        print("8. Exit")
 
         choice = input("Enter your choice: ")
 
@@ -40,6 +42,9 @@ def main():
             filter_by_category()
 
         elif choice == "7":
+            filter_by_date()
+
+        elif choice == "8":
             print("Exiting the program. Goodbye!")
             break
 

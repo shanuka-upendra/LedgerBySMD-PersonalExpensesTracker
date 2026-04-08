@@ -144,3 +144,24 @@ def filter_by_category():
             f"{exp['category']} | "
             f"{exp['date']}"
         )
+
+def filter_by_date():
+    expenses = load_expenses()
+    
+    date = input("Enter date (YYYY-MM-DD): ")
+    
+    filtered = [exp for exp in expenses if exp["date"] == date]
+    
+    if not filtered:
+        print("No expenses found for this date.")
+        return
+    
+    print("\nExpenses on this date: ")
+    
+    for exp in filtered:
+        print(
+            f"{exp['name']} | "
+            f"${exp['amount']} | "
+            f"{exp['category']} | "
+            f"{exp['date']}"
+        )
