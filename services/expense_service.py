@@ -1,3 +1,5 @@
+from cmath import exp
+
 from models.expense import Expense
 from utills.file_handler import load_expenses, save_expenses
 from datetime import datetime
@@ -111,3 +113,16 @@ def edit_expense():
             
     except ValueError:
         print("Invalid input. Please enter a number.")
+        
+        
+def show_total():
+    expenses = load_expenses()
+        
+    total = sum(
+        exp["amount"]
+        for exp in expenses
+    )
+    
+    print(
+        f"\n💰 Total Expenses: ${total:.2f}:"
+    )
