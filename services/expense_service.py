@@ -10,22 +10,16 @@ def add_expense():
 
     date = datetime.now().strftime("%Y-%m-%d")
 
-    expense = Expense(
-        name,
-        amount,
-        category,
-        date
-    )
+    expense = Expense(name, amount, category, date)
 
     expenses = load_expenses()
 
-    expenses.append(
-        expense.to_dict()
-    )
+    expenses.append(expense.to_dict())
 
     save_expenses(expenses)
 
     print("✅ Expense added successfully!")
+
 
 def view_expenses():
     expenses = load_expenses()
@@ -33,7 +27,7 @@ def view_expenses():
     if not expenses:
         print("No expenses found.")
         return
-    
+
     print("\nExpenses List:")
     for i, exp in enumerate(expenses, start=1):
         print(
@@ -43,17 +37,51 @@ def view_expenses():
             f"{exp['category']} | "
             f"{exp['date']}"
         )
-        
+
+
 def delete_expense():
+    expenses = load_expenses()
+
+    if not expenses:
+        print("No expenses to delete.")
+        return
+
+    print("\nExpenses List:")
+
+    for i, exp in enumerate(expenses, start=1):
+        print(
+            f"{i}. "
+            f"{exp['name']} | "
+            f"${exp['amount']} | "
+            f"{exp['category']} | "
+            f"{exp['date']}"
+        )
+
+    try:
+        index = int(input("Enter the number of the expense to delete: ")) - 1
+
+        if 0 <= index < len(expenses):
+            deleted = expenses.pop(index)
+            save_expenses(expenses)
+
+            print(f"✅ Deleted: {deleted['name']}")
+
+        else:
+            print("Invalid number. No expense deleted.")
+
+    except ValueError:
+        print("Invalid input. Please enter a number.")
+
+def edit_expense():
     expenses = load_expenses()
     
     if not expenses:
-        print("No expenses to delete.")
+        print("No expenses to edit.")
         return
     
     print("\nExpenses List:")
     
-    for i, exp in enumerate(expenses,start=1):
+    for i, exp in enumerate(expenses, start=1):
         print(
             f"{i}. "
             f"{exp['name']} | "
@@ -63,18 +91,23 @@ def delete_expense():
         )
         
     try:
-        index = int(input("Enter the number of the expense to delete: ")) - 1
+        index = int(input("Enter the number of the expense to edit: ")) - 1
         
         if 0 <= index < len(expenses):
-            deleted = expenses.pop(index)
+            name = input("Enter new expense name: ")
+            amount = float(input("Enter new expense amount: "))
+            category = input("Enter new expense category: ")
+            
+            expenses[index]["name"] = name
+            expenses[index]["amount"] = amount
+            expenses[index]["category"] = category
+            
             save_expenses(expenses)
             
-            print(
-                f"✅ Deleted: {deleted['name']}"
-            )
-        
+            print(f"✅ Edited: {name}")
+            
         else:
-            print("Invalid number. No expense deleted.")
+            print("Invalid number. No expense edited.")
             
     except ValueError:
         print("Invalid input. Please enter a number.")

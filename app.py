@@ -1,5 +1,6 @@
 from services.expense_service import (
     add_expense,
+    edit_expense,
     view_expenses,
     delete_expense
 )
@@ -10,7 +11,8 @@ def main():
         print("1. Add Expense")
         print("2. View Expenses")
         print("3. Delete Expense")
-        print("4. Exit")
+        print("4. Edit Expense")
+        print("5. Exit")
 
         choice = input("Enter your choice: ")
 
@@ -24,6 +26,9 @@ def main():
             delete_expense()
             
         elif choice == "4":
+            edit_expense()
+
+        elif choice == "5":
             print("Exiting the program. Goodbye!")
             break
 
