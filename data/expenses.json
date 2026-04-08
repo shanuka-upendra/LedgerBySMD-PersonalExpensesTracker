@@ -1,1 +1,20 @@
-[]
+[
+    {
+        "name": "Shanu",
+        "amount": 10000.0,
+        "category": "KOKO",
+        "date": "2026-04-08"
+    },
+    {
+        "name": "Shanu",
+        "amount": 20000.0,
+        "category": "GIFT_Hello",
+        "date": "2026-04-08"
+    },
+    {
+        "name": "ahdbc",
+        "amount": 2500.0,
+        "category": "A",
+        "date": "2026-04-08"
+    }
+]
