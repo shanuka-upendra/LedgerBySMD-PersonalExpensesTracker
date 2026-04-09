@@ -8,6 +8,7 @@ from services.expense_service import (
     view_expenses,
     delete_expense,
 )
+from utills.csv_exporter import (export_to_csv)
 
 
 def main():
@@ -21,7 +22,8 @@ def main():
         print("6. Filter by Category")
         print("7. Filter by Date")
         print("8. Monthly Summary")
-        print("9. Exit")
+        print("9. Export to csv")
+        print("10. Exit")
 
         choice = input("Enter your choice: ")
 
@@ -50,6 +52,9 @@ def main():
             monthly_summary()
 
         elif choice == "9":
+            export_to_csv()
+        
+        elif choice == "10":
             print("Exiting the program. Goodbye!")
             break
 
