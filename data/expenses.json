@@ -16,5 +16,11 @@
         "amount": 2500.0,
         "category": "A",
         "date": "2026-04-08"
+    },
+    {
+        "name": "AKSA",
+        "amount": 2400.0,
+        "category": "HELP",
+        "date": "2026-04-09"
     }
 ]

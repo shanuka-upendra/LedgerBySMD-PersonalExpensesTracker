@@ -1,9 +1,8 @@
-from cmath import exp
-
 from models.expense import Expense
 from utills.validator import get_valid_amount, get_valid_index
 from utills.file_handler import load_expenses, save_expenses
 from datetime import datetime
+from tabulate import tabulate
 
 
 def add_expense():
@@ -31,15 +30,13 @@ def view_expenses():
         print("No expenses found.")
         return
 
-    print("\nExpenses List:")
+    headers = ["No", "Name", "Amount", "Category", "Date"]
+    table = []
+
     for i, exp in enumerate(expenses, start=1):
-        print(
-            f"{i}. "
-            f"{exp['name']} | "
-            f"${exp['amount']} | "
-            f"{exp['category']} | "
-            f"{exp['date']}"
-        )
+        table.append([i, exp["name"], exp["amount"], exp["category"], exp["date"]])
+
+    print(tabulate(table, headers=headers, tablefmt="grid"))
 
 
 def delete_expense():
@@ -136,15 +133,13 @@ def filter_by_category():
         print("No expenses found for this category.")
         return
 
-    print("\nFiltered Expenses:")
+    headers = ["No", "Name", "Amount", "Category", "Date"]
+    table = []
 
-    for exp in filtered:
-        print(
-            f"{exp['name']} | "
-            f"${exp['amount']} | "
-            f"{exp['category']} | "
-            f"{exp['date']}"
-        )
+    for i, exp in enumerate(filtered, start=1):
+        table.append([i, exp["name"], exp["amount"], exp["category"], exp["date"]])
+
+    print(tabulate(table, headers=headers, tablefmt="grid"))
 
 
 def filter_by_date():
@@ -158,15 +153,13 @@ def filter_by_date():
         print("No expenses found for this date.")
         return
 
-    print("\nExpenses on this date: ")
+    headers = ["No", "Name", "Amount", "Category", "Date"]
+    table = []
 
-    for exp in filtered:
-        print(
-            f"{exp['name']} | "
-            f"${exp['amount']} | "
-            f"{exp['category']} | "
-            f"{exp['date']}"
-        )
+    for i, exp in enumerate(filtered, start=1):
+        table.append([i, exp["name"], exp["amount"], exp["category"], exp["date"]])
+
+    print(tabulate(table, headers=headers, tablefmt="grid"))
 
 
 def monthly_summary():
@@ -187,4 +180,3 @@ def monthly_summary():
 
     for month, total in summary.items():
         print(f"{month} : ${total:.2f}")
-        
