@@ -1,13 +1,14 @@
 from cmath import exp
 
 from models.expense import Expense
+from utills.validator import get_valid_amount, get_valid_index
 from utills.file_handler import load_expenses, save_expenses
 from datetime import datetime
 
 
 def add_expense():
     name = input("Enter expense name: ")
-    amount = float(input("Enter expense amount: "))
+    amount = get_valid_amount()
     category = input("Enter expense category: ")
 
     date = datetime.now().strftime("%Y-%m-%d")
@@ -60,7 +61,7 @@ def delete_expense():
         )
 
     try:
-        index = int(input("Enter the number of the expense to delete: ")) - 1
+        index = get_valid_index(len(expenses))
 
         if 0 <= index < len(expenses):
             deleted = expenses.pop(index)
@@ -94,11 +95,11 @@ def edit_expense():
         )
 
     try:
-        index = int(input("Enter the number of the expense to edit: ")) - 1
+        index = get_valid_index(len(expenses))
 
         if 0 <= index < len(expenses):
             name = input("Enter new expense name: ")
-            amount = float(input("Enter new expense amount: "))
+            amount = get_valid_amount()
             category = input("Enter new expense category: ")
 
             expenses[index]["name"] = name
@@ -186,3 +187,4 @@ def monthly_summary():
 
     for month, total in summary.items():
         print(f"{month} : ${total:.2f}")
+        
